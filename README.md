@@ -1,78 +1,78 @@
 <h2 align="center">
-  Università degli Studi di Camerino<br>
-  Scuola di Scienze e Tecnologie<br>
-  Corso di Laurea in Informatica<br>
-  Corso di Laurea in Informatica per la Comunicazione Digitale<br>
-  Corso di Algoritmi e Strutture Dati 2024/2025<br>
-  Parte di Laboratorio (6 CFU)<br>
+  University of Camerino<br>
+  School of Science and Technology<br>
+  Bachelor's Degree in Computer Science<br>
+  Bachelor's Degree in Computer Science for Digital Communication<br>
+  Algorithms and Data Structures Course 2024/2025<br>
+  Laboratory Part (6 CFU)<br>
   <br>
-  Istruzioni per la realizzazione del Progetto 1<br>
+    Instructions for Project 1<br>
   <br>
-  Progetto1: Implementazione e Validazione di un Sistema Basato su Alberi di Merkle
+  Project 1: Implementation and Validation of a Merkle Tree-Based System
 </h2>
 
 ---
 
 ### **Merkle Tree**
-Un **Merkle Tree** è una struttura dati ad albero binario utilizzata per garantire l'integrità e l'autenticità di un insieme di dati. È composto da nodi, ciascuno dei quali contiene un valore hash:
-- **Foglie**: Rappresentano gli hash dei dati originali.
-- **Nodi intermedi**: Rappresentano gli hash ottenuti combinando gli hash dei nodi figli (sinistro e destro).
-- **Hash root (radice)**: È il nodo più in alto dell'albero, ottenuto combinando gli hash intermedi.
+A **Merkle Tree** is a binary tree data structure used to ensure the integrity and authenticity of a data set. It is composed of nodes, each of which contains a hash value:
+- **Leaves**: These represent the hashes of the original data.
+- **Intermediate Nodes**: These represent the hashes obtained by combining the hashes of the child nodes (left and right).
+- **Root Hash**: This is the topmost node in the tree, obtained by combining the intermediate hashes.
 
-#### **Esempio di Merkle Tree**
-1. Si calcolano gli hash delle foglie (es. `H1 = Hash(D1)`, `H2 = Hash(D2)`, ecc.).
-2. Si combinano gli hash delle foglie per ottenere gli hash intermedi (es. `H12 = Hash(H1 + H2)`).
-3. Si calcola l'hash root (es. `Hroot = Hash(H12 + H34)`).
+#### **Merkle Tree Example**
+1. The hashes of the leaves are calculated (e.g. `H1 = Hash(D1)`, `H2 = Hash(D2)`, ecc.).
+2. The leaf hashes are combined to obtain intermediate hashes (e.g. `H12 = Hash(H1 + H2)`).
+3. The root hash is calculated (e.g. `Hroot = Hash(H12 + H34)`).
 
 ---
 
 ### **Merkle Proof**
-Una **Merkle Proof** è una sequenza di hash che permette di verificare se un dato appartiene a un Merkle Tree senza dover esaminare tutti i dati. La verifica avviene ricostruendo l'hash root a partire dal dato e dagli hash forniti nella proof, confrontandolo con la radice dell'albero.
+A **Merkle Proof** is a sequence of hashes that allows you to verify whether a piece of data belongs to a Merkle Tree without having to examine all the data. Verification occurs by reconstructing the root hash from the data and the hashes provided in the proof, comparing it to the root of the tree.
 
-#### **Esempio di Merkle Proof**
-1. Si fornisce l'hash del dato da verificare (es. `H1`) e gli hash necessari per risalire alla radice (es. `H2` e `H34`).
-2. Si combinano gli hash per ricostruire l'hash root (es. `H12 = Hash(H1 + H2)`, `Hroot = Hash(H12 + H34)`).
-3. Se l'hash root calcolato coincide con quello dell'albero, il dato è valido.
-
----
-
-### **Merkle Tree con numero di nodi non potenza di 2**
-Quando il numero di nodi foglia non è una potenza di 2, si adotta una strategia per gestire i nodi singoli:
-- Si ricalcola l'hash del nodo singolo (es. `Hash(Hash(E))`).
-- Si procede combinando gli hash come al solito.
+#### **Merkle Proof Example**
+1. The hash of the data to be verified is provided (e.g. `H1`) and the hashes needed to trace the root (e.g. `H2` e `H34`).
+2. The hashes are combined to reconstruct the root hash (e.g. `H12 = Hash(H1 + H2)`, `Hroot = Hash(H12 + H34)`).
+3. If the calculated root hash matches that of the tree, the data is valid.
 
 ---
 
-### **Vantaggi di Merkle Tree e Merkle Proof**
-1. **Efficienza**: Verifica rapida dei dati con un numero ridotto di hash.
-2. **Integrità**: Rilevazione immediata di manipolazioni.
-3. **Scalabilità**: Adatto a insiemi di dati molto grandi.
+### **Merkle Tree with number of nodes not power of 2**
+When the number of leaf nodes is not a power of 2, a strategy is adopted to manage single nodes:
+- The single node hash is recalculated (e.g. `Hash(Hash(E))`).
+- We proceed by combining the hashes as usual.
 
 ---
 
-### **Applicazioni**
-- **Blockchain**: Verifica delle transazioni.
-- **Sistemi di file distribuiti**: Verifica dell'integrità dei file.
-- **Database**: Garantire che i dati non siano stati alterati.
+### **Advantages of Merkle Tree and Merkle Proof**
+1. **Efficiency**: Quickly verify data with a small number of hashes.
+2. **Integrity**: Immediate detection of manipulations.
+3. **Scalability**: Suitable for very large data sets.
 
 ---
 
-### **Nota sull'hashing**
-Il progetto utilizza l'algoritmo **MD5** per il calcolo degli hash:
-- **MD5**: Produce un hash di 128 bit (16 byte) rappresentato come una stringa esadecimale di 32 caratteri.
-- **Metodi**:
-  - `dataToHash(Object data)`: Calcola l'hash di un oggetto.
-  - `computeMD5(byte[] input)`: Calcola l'hash di un array di byte.
-- **Limiti**: MD5 è vulnerabile a collisioni e non è sicuro per applicazioni crittografiche moderne. Alternative più sicure includono SHA-256.
+### **Applications**
+- **Blockchain**: Transaction verification.
+- **Distributed file systems**: Verify file integrity.
+- **Database**: Ensure that the data has not been altered.
 
 ---
 
-### **Classi e Componenti del Progetto**
-1. **HashUtil**: Fornisce metodi per il calcolo degli hash MD5.
-2. **HashLinkedList**: Una lista concatenata che gestisce gli hash MD5 degli elementi.
-3. **MerkleNode**: Rappresenta un nodo in un Merkle Tree (foglia o nodo intermedio).
-4. **MerkleProof**: Gestisce le prove di Merkle per verificare l'appartenenza di un dato o branch all'albero.
-5. **MerkleTree**: Rappresenta e gestisce un albero di Merkle completo, con metodi per la validazione dei dati e la generazione di prove.
+### **Note on hashing**
+The project uses the **MD5** algorithm for hash calculation:
+- **MD5**: Produces a 128-bit (16 byte) hash represented as a 32-character hexadecimal string.
+- **Methods**:
+  - `dataToHash(Object data)`: Calculate the hash of an object.
+  - `computeMD5(byte[] input)`: Calculate the hash of a byte array.
+- **Limits**: MD5 is vulnerable to collisions and is not secure for modern cryptographic applications. More secure alternatives include SHA-256.
+
+---
+
+### **Classes and Project Components**
+1. **HashUtil**: Provides methods for calculating MD5 hashes.
+2. **HashLinkedList**: A linked list that holds MD5 hashes of the elements.
+3. **MerkleNode**: Represents a node in a Merkle Tree (leaf or intermediate node).
+4. **MerkleProof**: It handles Merkle proofs to verify the membership of a given data point or branch in the tree.
+5. **MerkleTree**: Represents and manages a complete Merkle tree, with methods for data validation and proof generation.
 
 ---
 
