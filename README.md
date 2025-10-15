@@ -76,5 +76,5 @@ The project uses the **MD5** algorithm for hash calculation:
 
 ---
 
-### **Scopo del Progetto**
-Implementare un sistema basato su Merkle Tree per garantire l'integrità e l'autenticità dei dati in un insieme più ampio, utilizzando le classi sopra descritte.
+### **Project Purpose**
+Implement a Merkle Tree-based system to ensure data integrity and authenticity across a larger data set, using the classes described above.
