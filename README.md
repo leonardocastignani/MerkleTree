@@ -1,8 +1,7 @@
 <h2 align="center">
   University of Camerino<br>
   School of Science and Technology<br>
-  Bachelor's Degree in Computer Science<br>
-  Bachelor's Degree in Computer Science for Digital Communication<br>
+  Degree in Computer Science<br>
   Algorithms and Data Structures Course 2024/2025<br>
   Laboratory Part (6 CFU)<br>
   <br>
